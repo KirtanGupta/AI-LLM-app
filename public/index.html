@@ -542,18 +542,17 @@
       result.classList.remove('scanning');
 
       try {
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
+        // send the prompt to our own server instead of calling Anthropic directly
+        // (the external API doesn't allow browser CORS requests)
+        const response = await fetch("/api/ai", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: "claude-sonnet-4-20250514",
-            max_tokens: 1000,
-            messages: [{ role: "user", content: prompt }]
-          })
+          body: JSON.stringify({ prompt })
         });
 
         const data = await response.json();
-        const output = data.content?.[0]?.text ?? "No response received.";
+        // our route returns `{ success: true, output: result }` on success
+        const output = data.output ?? "No response received.";
 
         thinking.classList.remove('active');
         result.style.display = 'block';
