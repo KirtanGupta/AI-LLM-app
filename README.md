@@ -5,8 +5,6 @@ A simple web application using Node.js + Groq API.
 ## Features
 - User prompt input
 - AI-generated response
-- Scientific term extraction
-- Contract analysis
 
 ## Setup
 
