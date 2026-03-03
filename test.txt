@@ -1,0 +1,11 @@
+ai-llm-app/
+│
+├── server.js
+├── package.json
+├── .env
+├── /routes
+│     └── aiRoute.js
+├── /services
+│     └── aiService.js
+└── /public
+      └── index.html

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simple AI App</title>
+</head>
+<body>
+  <h2>Ask AI</h2>
+  
+  <textarea id="prompt" rows="5" cols="50"></textarea>
+  <br><br>
+  
+  <button onclick="sendPrompt()">Submit</button>
+  
+  <h3>Response:</h3>
+  <pre id="result"></pre>
+
+  <script>
+    async function sendPrompt() {
+      const prompt = document.getElementById("prompt").value;
+
+      const response = await fetch("/api/ai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await response.json();
+
+      document.getElementById("result").innerText = data.output;
+    }
+  </script>
+</body>
+</html>
